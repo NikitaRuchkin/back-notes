@@ -13,4 +13,4 @@ import { Product, ProductSchema } from './schemas/tableData.schema';
     ])
   ]
 })
-export class ProductsModule {}
+export class TableDataModuleModule {}

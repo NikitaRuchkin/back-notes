@@ -2,12 +2,12 @@ import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-// import { ProductsModule } from './products/products.module';
+import { TableDataModuleModule } from './tableData/tableData.module';
 
 @Module({
   imports: [
-    // ProductsModule,
-    MongooseModule.forRoot('mongodb+srv://Nik:1234@cluster0.5wrhp.mongodb.net/?retryWrites=true&w=majority')],
+    TableDataModuleModule,
+    MongooseModule.forRoot('mongodb+srv://admin:12345677@nodelist.ixitwvh.mongodb.net/?retryWrites=true&w=majority')],
   controllers: [AppController],
   providers: [AppService],
 })
