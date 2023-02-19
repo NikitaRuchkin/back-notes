@@ -5,7 +5,7 @@ import {Request, Response} from 'express'
 import { ProductService } from './tableData.service';
 import { Product } from './schemas/tableData.schema';
 
-@Controller('products')
+@Controller('tableData')
 export class TableDataController {
   constructor(private readonly productService: ProductService) {
 

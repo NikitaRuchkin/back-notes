@@ -1,4 +1,5 @@
+import { tableDataTypes } from "../schemas/tableData.schema";
+
 export class updateProductDto {
-  readonly title: string
-  readonly price: number
+  tableData: Array<tableDataTypes>;
 }
