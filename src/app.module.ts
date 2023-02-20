@@ -2,13 +2,14 @@ import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { TableDataModuleModule } from './tableData/tableData.module';
+import { ProductModule } from './entity/product/product.module';
 
 @Module({
   imports: [
-    TableDataModuleModule,
-    MongooseModule.forRoot('mongodb+srv://admin:12345677@nodelist.ixitwvh.mongodb.net/?retryWrites=true&w=majority')],
+    ProductModule,
+    MongooseModule.forRoot('mongodb://127.0.0.1:27017', {dbName:"test2"})],
   controllers: [AppController],
   providers: [AppService],
 })
 export class AppModule {}
+

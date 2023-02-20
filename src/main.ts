@@ -1,14 +1,27 @@
+import { HttpException, HttpStatus, ValidationError, ValidationPipe } from "@nestjs/common";
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 
-async function bootstrap() {
-  try {
+const bootstrap = async () =>
+{
+  try
+  {
     const PORT = process.env.PORT || 5000
     const app = await NestFactory.create(AppModule)
     app.enableCors()
+
+    app.useGlobalPipes(new ValidationPipe({
+      transformOptions: {
+        enableImplicitConversion: true, // allow conversion underneath
+      },}))
+
     await app.listen(PORT, () => console.log(`server started on ${PORT}`))
-  } catch (e) {
-    console.log(e)
+  }
+  catch (e)
+  {
+    throw e
   }
 }
-bootstrap();
+bootstrap()
+  .then(console.log)
+  .catch(console.error);
