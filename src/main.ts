@@ -23,5 +23,3 @@ const bootstrap = async () =>
   }
 }
 bootstrap()
-  .then(console.log)
-  .catch(console.error);
