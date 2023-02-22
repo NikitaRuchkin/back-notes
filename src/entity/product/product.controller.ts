@@ -24,7 +24,6 @@ export class ProductController {
   @Post('create')
   async create(@Body() dto: Product | Product[]): Promise<Product | Product[]> {
     let valutes = await  getValutes().then((data) => data);
-    console.log(valutes); //got actual valutes
     return await this.productService.create(dto);
   }
 

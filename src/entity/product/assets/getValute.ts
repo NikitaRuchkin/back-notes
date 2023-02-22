@@ -18,6 +18,8 @@ export async function getValutes() {
   await axios(config)
     .then(function (response) {
       let splitDataFirstStep = [];
+      let nominal = []
+      let spliteNominal
       let data = response.data.split('<Valute');
 
       data.map((item) => {
@@ -32,18 +34,46 @@ export async function getValutes() {
       splitDataFirstStep.map((value) => {
         namesValute.map((name) => {
           if (value.includes(name)) {
+            //take Nominal
+            spliteNominal = value.split('<Nominal>');
+            spliteNominal.map(
+              (item)=> {
+                if (item.includes('</Value>')) {
+                  nominal.push({ [name]: Number(item.split('</Nominal>')[0]) });
+                }
+                return item
+              }
+            )
+
+            //take Exchange Rates
             let splitValute = value.split('<Value>');
             splitValute.map((item) => {
               if (item.includes('</Value>')) {
-                splitDataFinish.push({ [name]: item.split('</Value>')[0] });
+                splitDataFinish.push({ [name]: Number(item.split('</Value>')[0].split(',').join('.')) });
               }
 
               return item;
             });
           }
+
         });
         return value;
       });
+
+      nominal.map(
+        (nominal) => {
+          splitDataFinish.map(
+            (item) => {
+              let key = Object.keys(nominal)[0]
+              if (item[key]) {
+                return item[key] = Number(item[key])/Number(nominal[key])
+              }
+            }
+          )
+          return nominal
+        }
+      )
+
       return splitDataFinish;
     })
     .catch(function (error) {
